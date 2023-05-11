@@ -240,6 +240,7 @@ class App:
             self.current_video_index = video_index
             page_json, video_name = self.fetch_video(video)
 
+            current_files = []
             try:
                 download_url = page_json["elements"][0]["selectedVideo"]["url"][
                     "progressiveUrl"
@@ -260,7 +261,6 @@ class App:
                         f"{video_index:0=2d}. {video_name}.mp4 @{self.video_format}p"
                     )
                 )
-                current_files = []
                 for file in os.listdir(chapter_path):
                     if file.endswith(".mp4") and ". " in file:
                         ff = re.split("\d+\. ", file)[1].replace(".mp4", "")
